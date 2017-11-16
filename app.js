@@ -18,7 +18,6 @@ let connector = new ChatConnector({
 });
 server.post('/api/messages', connector.listen());
 
-let timer;
 let counter = 0;
 
 let bot = new UniversalBot(connector, (session) => {
@@ -53,7 +52,7 @@ bot.dialog('proActive', (session) => {
 		session.send('starting...');
 		counter++;
 		session.send(counter + " count");
-		timer = setInterval(() => {
+		setInterval(() => {
 			db.find('pendingMessages', {}, (results) => {
 				results.forEach((item) => {
 					let msg = item.message;
